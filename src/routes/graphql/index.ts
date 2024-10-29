@@ -4,7 +4,7 @@ import { graphql } from 'graphql';
 
 const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
   const { prisma } = fastify;
-
+1
   fastify.route({
     url: '/',
     method: 'POST',
