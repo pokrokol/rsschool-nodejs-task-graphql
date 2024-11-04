@@ -1,31 +1,28 @@
 import { PrismaClient } from '@prisma/client';
 import DataLoader from 'dataloader';
 
-// Interface representing the application context
+// Updated Interface Names
 export interface AppContext {
-  prismaClient: PrismaClient;
-  dataLoaders: DataLoaders;
+  prisma: PrismaClient;
+  dataLoaders: Loaders;
 }
 
-// Interface representing a membership type
-export interface MembershipType {
+export interface Membership {
   id: string;
-  discountPercentage: number;
-  monthlyPostLimit: number;
+  discount: number;
+  postsLimitPerMonth: number;
 }
 
-// Interface representing a user
 export interface User {
   id: string;
   name: string;
-  accountBalance: number;
+  balance: number;
   posts?: Post[];
-  profile?: UserProfile;
-  subscriptions?: Subscription[];
-  subscribers?: Subscription[];
+  profile?: Profile;
+  userSubscribedTo?: Subscription[];
+  subscribedToUser?: Subscription[];
 }
 
-// Interface representing a post
 export interface Post {
   id: string;
   title: string;
@@ -33,18 +30,22 @@ export interface Post {
   authorId: string;
 }
 
-// Interface representing a user's profile
-export interface UserProfile {
+export interface Profile {
   id: string;
   isMale: boolean;
-  birthYear: number;
+  yearOfBirth: number;
   userId: string;
-  membershipTypeId: string;
+  memberTypeId: string;
 }
 
-// Interface representing a subscription relationship between users
 export interface Subscription {
   subscriberId: string;
   authorId: string;
 }
 
+export interface Loaders {
+  userLoader: DataLoader<string, User | undefined, string>;
+  postsLoader: DataLoader<string, Post[] | undefined, string>;
+  profileLoader: DataLoader<string, Profile | undefined, string>;
+  memberTypeLoader: DataLoader<string, Membership | undefined, string>;
+}
