@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import DataLoader from 'dataloader';
-import { Post } from '../types/types.js';
-
+import { Post } from '../types/Itypes.js';
 
 export const createPostsLoader = (prisma: PrismaClient) => {
   return new DataLoader<string, Post[]>(async (authorIds: readonly string[]) => {

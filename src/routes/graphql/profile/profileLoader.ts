@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import DataLoader from 'dataloader';
-import { Profile } from '../types/types.js';
-
+import { Profile } from '../types/Itypes.js';
 
 export const createProfileLoader = (prisma: PrismaClient) => {
   return new DataLoader<string, Profile | undefined>(

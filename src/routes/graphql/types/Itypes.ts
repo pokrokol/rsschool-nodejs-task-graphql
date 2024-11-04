@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import DataLoader from 'dataloader';
 
 // Updated Interface Names
-export interface AppContext {
+export interface Context {
   prisma: PrismaClient;
   dataLoaders: Loaders;
 }

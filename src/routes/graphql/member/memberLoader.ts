@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import DataLoader from 'dataloader';
-import { Membership } from '../types/types.js';
-
+import { Membership } from '../types/Itypes.js';
 
 export const createMemberTypeLoader = (prisma: PrismaClient) => {
   return new DataLoader<string, Membership | undefined>(
