@@ -1,5 +1,6 @@
 import {
   GraphQLFloat,
+  GraphQLInputObjectType,
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
@@ -10,7 +11,6 @@ import { UUIDType } from '../uuid.js';
 import { Context, User } from '../Itypes.js';
 import { PostType } from './post.type.js';
 import { ProfileType } from './profile.type.js';
-
 
 export const UserType: GraphQLObjectType<User, Context> = new GraphQLObjectType({
   name: 'User',
@@ -50,5 +50,21 @@ export const UserType: GraphQLObjectType<User, Context> = new GraphQLObjectType(
             )
           : null,
     },
+  }),
+});
+
+export const CreateUserInputType = new GraphQLInputObjectType({
+  name: 'CreateUserInput',
+  fields: () => ({
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    balance: { type: new GraphQLNonNull(GraphQLFloat) },
+  }),
+});
+
+export const ChangeUserInputType = new GraphQLInputObjectType({
+  name: 'ChangeUserInput',
+  fields: () => ({
+    name: { type: GraphQLString },
+    balance: { type: GraphQLFloat },
   }),
 });
