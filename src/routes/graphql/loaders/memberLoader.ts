@@ -4,11 +4,11 @@ import { Membership } from '../types/Itypes.js';
 
 export const createMemberTypeLoader = (prisma: PrismaClient) => {
   return new DataLoader<string, Membership | undefined>(
-    async (memberTypeIds: readonly string[]) => {
+    async (ids: readonly string[]) => {
       const memberTypes = await prisma.memberType.findMany({
         where: {
           id: {
-            in: memberTypeIds as string[],
+            in:[...ids],
           },
         },
       });
@@ -16,7 +16,7 @@ export const createMemberTypeLoader = (prisma: PrismaClient) => {
       const memberTypeMap = new Map(
         memberTypes.map((memberType) => [memberType.id, memberType]),
       );
-      return memberTypeIds.map((id) => memberTypeMap.get(id));
+      return ids.map((id) => memberTypeMap.get(id));
     },
   );
 };

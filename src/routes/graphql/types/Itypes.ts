@@ -4,8 +4,9 @@ import DataLoader from 'dataloader';
 // Updated Interface Names
 export interface Context {
   prisma: PrismaClient;
-  dataLoaders: Loaders;
+  loaders: DataLoaders;
 }
+
 
 export interface Membership {
   id: string;
@@ -42,10 +43,26 @@ export interface Subscription {
   subscriberId: string;
   authorId: string;
 }
+export type Subscriptions = {
+  subscribedToUser: {
+    subscriberId: string;
+    authorId: string;
+  }[];
+} & User;
 
-export interface Loaders {
+export type Subscribers = {
+  userSubscribedTo: {
+    subscriberId: string;
+    authorId: string;
+  }[];
+} & User;
+
+export interface DataLoaders {
   userLoader: DataLoader<string, User | undefined, string>;
   postsLoader: DataLoader<string, Post[] | undefined, string>;
   profileLoader: DataLoader<string, Profile | undefined, string>;
   memberTypeLoader: DataLoader<string, Membership | undefined, string>;
+  subscribedToUserLoader: DataLoader<string, Subscriptions[]>;
+  userSubscribedToLoader: DataLoader<string, Subscribers[]>;
+  postsByAuthorIdLoader: DataLoader<string, Post[] | undefined, string>;
 }
